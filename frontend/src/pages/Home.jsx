@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/home.css'
-import { Container,Row,Col } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 
 import heroImg from '../assets/images/hero-img01.jpg'
 import heroImg02 from '../assets/images/hero-img02.jpg'
@@ -12,32 +12,35 @@ import experienceImg from '../assets/images/experience.png'
 import SearchBar from '../shared/SearchBar'
 import ServicesList from '../services/ServicesList'
 import FeaturedTourList from "../components/Featured-tours/FeaturedTourList"
+import MasonryImagesGallery from '../components/Image-gallery/MasonryImagesGallery'
+import Testimonial from '../components/testimonial/Testimonial'
+import NewsLetter from '../shared/NewsLetter'
 
 const home = () => {
   return <>
 
-  <section>
-    <Container>
-      <Row>
-        <Col lg='6'>
-          <div className="hero__content">
-            <div className="hero__subtitle d-flex align-items-center">
-              <Subtitle Subtitle={'Know Before You Go'}/>
-              <img src={worldImg} alt="" />
-            </div>
-            <h1>Traveling opens the door to creating
-              <span className='highlight'>memories</span>
-            </h1>
+    <section>
+      <Container>
+        <Row>
+          <Col lg='6'>
+            <div className="hero__content">
+              <div className="hero__subtitle d-flex align-items-center">
+                <Subtitle Subtitle={'Know Before You Go'} />
+                <img src={worldImg} alt="" />
+              </div>
+              <h1>Traveling opens the door to creating
+                <span className='highlight'>memories</span>
+              </h1>
               <p>Travelling may mean many things for many people. If we open up dictionaries, they give many meanings of travelling. Someone may be on a trip or journey. For another group, travelling may mean going from one place to another as a travel agent, salesman, for business purpose, or studies. Light also travels from one object to another. Again, in some games like basketball, breaking a certain rule may mean travelling.</p>
-          </div>
+            </div>
 
-        </Col>
+          </Col>
 
-        <Col lg='2'>
-          <div className="hero__img-box">
-            <img src={heroImg} alt="" />
-          </div>
-        </Col>
+          <Col lg='2'>
+            <div className="hero__img-box">
+              <img src={heroImg} alt="" />
+            </div>
+          </Col>
           <Col lg='2'>
             <div className="hero__img-box mt-4">
               <video src={heroVideo} alt="" controls />
@@ -50,9 +53,9 @@ const home = () => {
           </Col>
 
           <SearchBar />
-      </Row>
-    </Container>
-  </section>
+        </Row>
+      </Container>
+    </section>
     {/*===========hero Section start===========   */}
     <section>
       <Container>
@@ -124,12 +127,51 @@ const home = () => {
 
     {/*============experience section end===================++*/}
 
+    {/*============gallery section start======================*/}
+    <section>
+      <Container>
+        <Row>
+          <Col lg='12'>
+            <Subtitle subtitle={"Gallery"} />
+            <h2 className='gallery__title'>
+              visit our customers tour gallery
+            </h2>
+          </Col>
+          <Col lg='12'>
+            <MasonryImagesGallery />
+
+          </Col>
+        </Row>
+
+      </Container>
+    </section>
+    {/*============gallery section end========================*/}
+
+    {/*============testimonial section start========================*/}
+    <section>
+      <Container>
+        <Row>
+          <Col lg='12'>
+            <Subtitle subtitle={'fans love'} />
+            <h2 className="testimonial__title">What our fans say about us</h2>
+          </Col>
+          <Col lg='12'>
+            <Testimonial />
+          </Col>
+        </Row>
+      </Container>
+
+    </section>
+    {/*============testimonial section end========================*/}
+
+    <NewsLetter />
+
 
   </>
-    
-      
-    
-  
+
+
+
+
 }
 
 export default home
