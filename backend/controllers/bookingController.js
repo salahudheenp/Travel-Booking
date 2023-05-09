@@ -2,7 +2,8 @@ import Booking from '../models/Booking'
 
 
 // create new booking
-export const createBooking = async () => {
+export const createBooking = async (req, res) => {
+    console.log(req.body, 'bodyyyyyyyy');
     const newBooking = new Booking(req.body)
 
     try {
@@ -29,6 +30,7 @@ export const getBooking = async (req, res) => {
     const id = req.params.id
 
     try {
+
         const book = await Booking.findById(id)
 
         res.status(200).json({

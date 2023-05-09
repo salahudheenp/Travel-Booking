@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const bookingSchema = new mongoose.Schema(
     {
         userId: {
-            type: string
+            type: String
 
         },
         userEmail: {
@@ -34,4 +34,4 @@ const bookingSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.model("Booking", BookingSchema);
+export default mongoose.model("Booking", bookingSchema);

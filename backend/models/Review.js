@@ -6,7 +6,7 @@ const reviewSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Tour",
     },
-    username: {
+    name: {
       type: String,
       required: true,
     },
@@ -16,7 +16,6 @@ const reviewSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      required: true,
       min: 0,
       max: 5,
       default: 0,

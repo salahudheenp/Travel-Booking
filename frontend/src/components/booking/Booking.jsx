@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './booking.css'
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from 'reactstrap'
 import { useNavigate } from 'react-router-dom'
-
+import { AuthContext } from '../../context/AuthContext'
+import { BASE_URL } from '../../utils/config'
 
 const Booking = ({ tour, avgRating }) => {
 
-    const { price, reviews } = tour
+    const { price, reviews, title } = tour
 
     const navigate = useNavigate()
 
-    const [credentials, setCredentials] = useState({
-        userId: '01',
-        userEmail: 'exam@asd',
+    const { user } = useContext(AuthContext)
+    const [booking, setBooking] = useState({
+        userId: user && user._id,
+        userEmail: user && user.email,
+        tourName: title,
         fullName: '',
         phone: '',
         guestSize: 1,
@@ -20,18 +23,41 @@ const Booking = ({ tour, avgRating }) => {
     })
 
     const handleChange = (e) => {
-        setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }))
+        setBooking(prev => ({ ...prev, [e.target.id]: e.target.value }))
     }
 
     const serviceFee = 10
-    const totalAmount = Number(price) * Number(credentials.guestSize) + Number(serviceFee)
+    const totalAmount = Number(price) * Number(booking.guestSize) + Number(serviceFee)
 
     // send data to server
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
+        try {
+            if (!user || user === undefined || user === null) {
+                return alert('please sign in')
+            }
 
-        console.log(credentials);
-        navigate('/thank-you')
+            const res = await fetch(`${BASE_URL}/booking`, {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(booking)
+            })
+
+            const result = await res.json()
+
+            if (!res.ok) {
+                return alert(result.message)
+            }
+            navigate('/thank-you')
+
+        } catch (err) {
+            alert(err.message
+
+            )
+        }
     }
 
     return (
@@ -65,12 +91,10 @@ const Booking = ({ tour, avgRating }) => {
                         <input type='number' placeholder='Phone' id='phone' required onChange={handleChange} />
                     </FormGroup>
                     <FormGroup className='d-flex  align-items-center gap-3'>
-                        <input type='text' placeholder='' id='bookAt' required onChange={handleChange} />
+                        <input type='date' placeholder='' id='bookAt' required onChange={handleChange} />
                         <input type='text' placeholder='Guest' id='guestSize' required onChange={handleChange} />
                     </FormGroup>
-                    <FormGroup>
-                        <input type='text' placeholder='Full Name' id='fullName' required onChange={handleChange} />
-                    </FormGroup>
+
                 </Form>
             </div>
             {/*=========================booking__form end====== ==============*/}
@@ -104,3 +128,5 @@ const Booking = ({ tour, avgRating }) => {
 }
 
 export default Booking
+
+

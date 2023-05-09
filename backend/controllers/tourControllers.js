@@ -5,8 +5,9 @@ import Tour from '../models/Tour'
 // create new tour
 
 export const createTour = async (req, res) => {
-
+    console.log(req.body);
     const newTour = new Tour(req.body)
+
 
     try {
         const savedTour = await newTour.save()
@@ -106,10 +107,10 @@ export const getAllTour = async (req, res) => {
 // get tour by search
 
 export const getTourBySearch = async (req, res) => {
-
     const city = new RegExp(req.query.city, 'i')
     const distance = parseInt(req.query.distance)
     const maxGroupSize = parseInt(req.query.maxGroupSize)
+    console.log(city, distance, maxGroupSize, '909090');
 
     try {
 

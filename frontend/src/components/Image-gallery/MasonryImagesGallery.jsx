@@ -4,9 +4,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
 
 const MasonryImagesGallery = () => {
-    console.log(galleryImages);
 
-    console.log(Object.values(galleryImages));
     return (
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 3, 992: 4 }}>
             <Masonry gutter='1rem'>

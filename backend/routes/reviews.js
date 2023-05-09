@@ -5,7 +5,7 @@ import { verifyUser } from '../utils/verifyToken'
 
 const router = express.Router()
 
-router.post('/:tourId', verifyUser, createReview)
+router.post('/:tourId', createReview)
 
 
 
